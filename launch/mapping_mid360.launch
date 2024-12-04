@@ -4,6 +4,8 @@
 	<arg name="rviz" default="true" />
 
 	<rosparam command="load" file="$(find fast_lio)/config/mid360.yaml" />
+	<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="localizer_to_base_link" args="0.1 0 0.45 0 0 0 base_link livox_frame"/> -->
+	<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="base_link_to_odom" args="0.0 0.0 0.0 0 0 0 odom base_link"/> -->
 
 	<param name="feature_extract_enable" type="bool" value="0"/>
 	<param name="point_filter_num" type="int" value="3"/>
@@ -12,10 +14,12 @@
 	<param name="filter_size_map" type="double" value="0.5" />
 	<param name="cube_side_length" type="double" value="1000" />
 	<param name="runtime_pos_log_enable" type="bool" value="0" />
-    <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" /> 
+    <!-- <node pkg="fast_lio" type="fastlio_mapping" name="laserMapping" output="screen" />  -->
+	<node pkg="fast_lio" type="fastlio_mapping_custom" name="laserMappingCustom" output="screen" /> 
 
 	<group if="$(arg rviz)">
-	<node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find fast_lio)/rviz_cfg/loam_livox.rviz" />
+	<!-- <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find fast_lio)/rviz_cfg/loam_livox.rviz" /> -->
+	<node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find fast_lio)/rviz_cfg/loam_livox_cutom.rviz" />
 	</group>
 
 </launch>
